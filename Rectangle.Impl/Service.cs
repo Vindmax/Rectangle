@@ -33,37 +33,13 @@ namespace Rectangle.Impl
 			var maxX = xCoords.Last().X;
 			var maxY = yCoords.Last().Y;
 
-			var rectWithoutTopPoint = new Rectangle()
-			{
-				X = minX,
-				Y = maxY - 1,
-				Height = (maxY - 1) - minY,
-				Width = maxX - minX
-			};
+			var rectWithoutTopPoint = CreateRectangle(minX, maxY - 1, maxX - minX, (maxY - 1) - minY);
 
-			var rectWithoutRightPoint = new Rectangle()
-			{
-				X = minX,
-				Y = maxY,
-				Height = maxY - minY,
-				Width = (maxX - 1) - minX
-			};
+			var rectWithoutRightPoint = CreateRectangle(minX, maxY, (maxX - 1) - minX, maxY - minY);
 
-			var rectWithoutBottomPoint = new Rectangle()
-			{
-				X = minX,
-				Y = maxY,
-				Height = maxY - minY - 1,
-				Width = maxX - minX
-			};
+			var rectWithoutBottomPoint = CreateRectangle(minX, maxY, maxX - minX, maxY - minY - 1);
 
-			var rectWithoutLeftPoint = new Rectangle()
-			{
-				X = minX + 1,
-				Y = maxY,
-				Height = maxY - minY,
-				Width = maxX - minX - 1
-			};
+			var rectWithoutLeftPoint = CreateRectangle(minX + 1, maxY, maxX - minX - 1, maxY - minY);
 
 			var rectList = new List<Rectangle>() { rectWithoutTopPoint, rectWithoutRightPoint, rectWithoutBottomPoint, rectWithoutLeftPoint };
 
@@ -83,6 +59,17 @@ namespace Rectangle.Impl
 
 			return null;
 		}
+
+		private static Rectangle CreateRectangle(int x, int y, int width, int height)
+        {
+			return new Rectangle
+			{
+				X = x,
+				Y = y,
+				Width = width,
+				Height = height
+			};
+        }
 
 		private static int GetNumberOfPointsOutsideRect(Rectangle rect, List<Point> points)
         {
