@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing;
 
 namespace Rectangle.Impl
 {
-	public static class Service
+    public static class Service
 	{
 		/// <summary>
 		/// See TODO.txt file for task details.
@@ -51,10 +50,8 @@ namespace Rectangle.Impl
 					rect.Width = rect.Height + 1;
 
 				if (IsRectangle(rect))
-				{
 					if (GetNumberOfPointsOutsideRect(rect, points) == 1)
 						return rect;
-                }
             }
 
 			return null;
@@ -73,14 +70,8 @@ namespace Rectangle.Impl
 
 		private static int GetNumberOfPointsOutsideRect(Rectangle rect, List<Point> points)
         {
-			int numberOfPoints = 0;
-            foreach (var point in points)
-            { 
-				if (!(point.X >= rect.X && point.X <= (rect.Width + rect.X)
-					&& point.Y <= rect.Y && point.Y >= (rect.Y - rect.Height)))
-					numberOfPoints++;
-            }
-			return numberOfPoints;
+			return points.Where(p => !(p.X >= rect.X && p.X <= (rect.Width + rect.X) && 
+									   p.Y <= rect.Y && p.Y >= (rect.Y - rect.Height))).Count();
         }
 
 		private static bool IsRectangle(Rectangle rect) => rect.Width != rect.Height ? true : false;
