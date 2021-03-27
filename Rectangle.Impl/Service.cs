@@ -21,7 +21,7 @@ namespace Rectangle.Impl
 			if (points.Count < 2)
 				throw new ArgumentException("\"Points\" should have at least 2 points");
 
-			if (ArePointsDistinct(points))
+			if (ArePointsSimilar(points))
 				throw new ArgumentException("\"Points\" should have different coordinates");
 
 
@@ -85,7 +85,7 @@ namespace Rectangle.Impl
 
 		private static bool IsRectangle(Rectangle rect) => rect.Width != rect.Height ? true : false;
 
-		private static bool ArePointsDistinct(List<Point> points)
+		private static bool ArePointsSimilar(List<Point> points)
         {
             for (int i = 0; i < points.Count; i++)
             {
