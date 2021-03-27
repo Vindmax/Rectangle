@@ -73,10 +73,7 @@ namespace Rectangle.Impl
 					rect.Height = rect.Width + 1;
 				if (rect.Width == 0)
 					rect.Width = rect.Height + 1;
-			}
 
-            foreach (var rect in rectList)
-            {
 				if (IsRectangle(rect))
 				{
 					if (GetNumberOfPointsOutsideRect(rect, points) == 1)
