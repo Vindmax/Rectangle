@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rectangle.Impl.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -68,25 +69,14 @@ namespace Rectangle.Impl
 			};
         }
 
-		private static int GetNumberOfPointsOutsideRect(Rectangle rect, List<Point> points)
-        {
-			return points.Where(p => !(p.X >= rect.X && p.X <= (rect.Width + rect.X) && 
-									   p.Y <= rect.Y && p.Y >= (rect.Y - rect.Height))).Count();
-        }
+		private static int GetNumberOfPointsOutsideRect(Rectangle rect, List<Point> points) => 
+			points.Where(p => !(p.X >= rect.X && p.X <= (rect.Width + rect.X) && 
+								p.Y <= rect.Y && p.Y >= (rect.Y - rect.Height))).Count();
 
 		private static bool IsRectangle(Rectangle rect) => rect.Width != rect.Height ? true : false;
 
-		private static bool ArePointsSimilar(List<Point> points)
-        {
-            for (int i = 0; i < points.Count; i++)
-            {
-                for (int j = i + 1; j < points.Count; j++)
-                {
-					if(points[i].X == points[j].X && points[i].Y == points[j].Y)
-						return true;
-                }
-            }
-			return false;
-        }
-	}
+		private static bool ArePointsSimilar(List<Point> points) =>
+			points.Distinct(new PointsComparer()).Count() != points.Count ? true : false;
+
+    }
 }
