@@ -24,14 +24,10 @@ namespace Rectangle.Impl
 			if (ArePointsSimilar(points))
 				throw new ArgumentException("\"Points\" should have different coordinates");
 
-
-			var xCoords = points.OrderBy(p => p.X).ToList();
-			var yCoords = points.OrderBy(p => p.Y).ToList();
-
-			var minX = xCoords.First().X;
-			var minY = yCoords.First().Y;
-			var maxX = xCoords.Last().X;
-			var maxY = yCoords.Last().Y;
+			var minX = points.Min(p => p.X);
+			var minY = points.Min(p => p.Y);
+			var maxX = points.Max(p => p.X);
+			var maxY = points.Max(p => p.Y);
 
 			var rectWithoutTopPoint = CreateRectangle(minX, maxY - 1, maxX - minX, (maxY - 1) - minY);
 
